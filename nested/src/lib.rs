@@ -40,7 +40,10 @@
 
 #![no_std]
 
-include!(concat!(env!("OUT_DIR"), std::path::MAIN_SEPARATOR, "count.rs"));
+#[cfg(not(target_os = "windows"))]
+include!(concat!(env!("OUT_DIR"), "/count.rs"));
+#[cfg(target_os = "windows")]
+include!(concat!(env!("OUT_DIR"), "\\count.rs"));
 
 #[doc(hidden)]
 #[macro_export]
